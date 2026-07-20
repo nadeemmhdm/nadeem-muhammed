@@ -71,6 +71,7 @@
         "areaServed": ["Kerala", "India", "Worldwide"],
         "sameAs": [
           "https://linkedin.com/in/nadeem-melethil",
+          "https://github.com/nadeemmhdm",
           "https://metailearn.com/?trk=public_post_main-feed-card-text"
         ],
         "knowsLanguage": ["English", "Malayalam"],
@@ -188,7 +189,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -230,6 +231,7 @@
       background-size:72px 72px;color:var(--ink);font-family:var(--font-body);
       overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;
     }
+    .scroll-progress{position:fixed;inset:0 auto auto 0;z-index:100;width:var(--scroll-progress,0%);height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 16px var(--glow);transition:width .12s linear}
     body::before{
       content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       background:linear-gradient(115deg,rgba(255,107,26,.09),transparent 36%,rgba(0,208,132,.08) 68%,transparent);
@@ -291,13 +293,15 @@
     .btn-secondary{background:var(--surface);color:var(--ink)}
     .btn:hover{transform:translateY(-3px)}
     .socials{display:flex;gap:10px;flex-wrap:wrap}
-    .socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;place-items:center;text-decoration:none;color:var(--muted)}
+    .socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;place-items:center;text-decoration:none;color:var(--muted);line-height:1}
+    .socials i{font-size:1.2rem;line-height:1}
     .socials a:hover{border-color:var(--accent);color:var(--accent)}
 
     .profile-card{
       border:1px solid var(--line);background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface2) 80%,transparent));
-      border-radius:22px;padding:24px;box-shadow:0 30px 90px var(--shadow);position:relative;overflow:hidden;
+      border-radius:22px;padding:24px;box-shadow:0 30px 90px var(--shadow);position:relative;overflow:hidden;animation:profile-float 6s ease-in-out infinite;
     }
+    @keyframes profile-float{50%{transform:translateY(-8px)}}
     .profile-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3))}
     .avatar-row{display:flex;align-items:center;gap:15px;margin-bottom:20px}
     .avatar{width:66px;aspect-ratio:1;border-radius:18px;background:var(--accent);color:#071109;display:grid;place-items:center;font-size:2rem}
@@ -341,8 +345,9 @@
     .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
     .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
     .card,.project,.timeline-item,.contact-card{
-      background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 16px 50px color-mix(in srgb,var(--shadow) 55%,transparent);
+      background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 16px 50px color-mix(in srgb,var(--shadow) 55%,transparent);transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;
     }
+    .card:hover,.project:hover,.timeline-item:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--accent) 48%,var(--line));box-shadow:0 24px 58px color-mix(in srgb,var(--shadow) 72%,transparent)}
     .card-title{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:1.2rem;font-weight:900;margin-bottom:16px}
     .card-title i,.project-icon{width:44px;aspect-ratio:1;border-radius:13px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);display:grid;place-items:center;font-size:1.28rem}
     .skill-list{display:flex;flex-wrap:wrap;gap:8px}
@@ -356,14 +361,15 @@
     .project p{color:var(--ink2);font-size:.86rem;line-height:1.75;margin-bottom:18px}
     .project-actions{margin-top:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
     .text-link,.details-btn{display:inline-flex;align-items:center;gap:7px;color:var(--accent);background:none;border:0;text-decoration:none;font:inherit;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
-    .details{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:0}
+    .details{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease,margin-top .32s ease;margin-top:0}
     .details.open{grid-template-rows:1fr;margin-top:16px}
     .details-inner{overflow:hidden}
     .details-box{border:1px solid var(--line);background:var(--bg2);padding:14px;border-radius:12px;color:var(--ink2);font-size:.78rem;line-height:1.75}
+    .details-btn i{transition:transform .25s ease}.details-btn[aria-expanded="true"] i{transform:rotate(180deg)}
 
     .timeline{display:grid;gap:16px;position:relative}
-    .timeline-item{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
-    .dot{width:42px;aspect-ratio:1;border:1px solid var(--line2);border-radius:999px;color:var(--accent);display:grid;place-items:center;background:var(--bg2)}
+    .timeline-item{display:grid;grid-template-columns:42px minmax(0,1fr);gap:16px;align-items:start}
+    .dot{width:42px;height:42px;border:1px solid var(--line2);border-radius:999px;color:var(--accent);display:grid;place-items:center;background:var(--bg2);line-height:1}
     .period{display:inline-flex;color:#071109;background:var(--accent);border-radius:999px;padding:4px 10px;font-size:.64rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
     .timeline h3{font-family:var(--font-display);font-size:1.25rem}
     .company{color:var(--muted);font-size:.78rem;font-weight:800;margin:5px 0 10px}
@@ -373,11 +379,11 @@
     .contact-sub{color:var(--ink2);line-height:1.85;margin-bottom:22px}
     .contact-list{display:grid;gap:10px;margin-bottom:20px}
     .contact-list a,.contact-list div{display:flex;align-items:center;gap:10px;color:var(--ink2);text-decoration:none;font-weight:700}
-    .contact-list i{color:var(--accent)}
+    .contact-list i{width:20px;flex:0 0 20px;color:var(--accent);font-size:1.1rem;text-align:center;line-height:1}
     .contact-cards{display:grid;gap:12px}
     .contact-card{display:flex;align-items:center;gap:14px;text-decoration:none;transition:.25s ease}
     .contact-card:hover{transform:translateX(5px);border-color:var(--accent)}
-    .contact-card i{width:44px;aspect-ratio:1;border-radius:13px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);display:grid;place-items:center;font-size:1.2rem}
+    .contact-card i{width:44px;flex:0 0 44px;aspect-ratio:1;border-radius:13px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);display:grid;place-items:center;font-size:1.2rem;line-height:1}
     .label{color:var(--muted);font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em}
     .value{font-weight:800;color:var(--ink);font-size:.9rem;word-break:break-word}
 
@@ -388,8 +394,8 @@
 
     footer{border-top:1px solid var(--line);padding:30px 0;background:var(--bg)}
     .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;color:var(--muted);font-size:.78rem;font-weight:700}
-    .foot-links{display:flex;gap:16px;list-style:none;flex-wrap:wrap}
-    .foot a{text-decoration:none}
+    .foot-links{display:flex;align-items:center;gap:16px;list-style:none;flex-wrap:wrap}
+    .foot a{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
     .foot a:hover{color:var(--accent)}
 
     .persona-only{display:none}
@@ -397,8 +403,13 @@
     [data-persona="dev"] .dev-text,[data-persona="pen"] .pen-text{display:block}
     .pen-text,.dev-text{display:none}
 
-    .reveal{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s cubic-bezier(.22,1,.36,1)}
     .reveal.vis{opacity:1;transform:none}
+    .grid-2 .reveal:nth-child(2),.grid-3 .reveal:nth-child(2),.timeline .reveal:nth-child(2){transition-delay:.08s}
+    .grid-3 .reveal:nth-child(3),.timeline .reveal:nth-child(3){transition-delay:.16s}
+    .grid-3 .reveal:nth-child(4),.timeline .reveal:nth-child(4){transition-delay:.24s}
+    .grid-3 .reveal:nth-child(5),.timeline .reveal:nth-child(5){transition-delay:.32s}
+    .grid-3 .reveal:nth-child(6),.timeline .reveal:nth-child(6){transition-delay:.4s}
 
     @media(max-width:1040px){
       .hero-grid{grid-template-columns:1fr;gap:34px}
@@ -409,15 +420,17 @@
       :root{--nav:64px}
       body{background-size:52px 52px}
       .wrap{width:min(100% - 32px,var(--max))}
-      .topbar{height:auto}
-      .nav{min-height:64px;align-items:center;padding:12px 0;flex-wrap:wrap}
+      .topbar{height:auto;position:sticky;box-shadow:0 10px 30px color-mix(in srgb,var(--shadow) 38%,transparent)}
+      .nav{min-height:64px;align-items:center;padding:10px 0;flex-wrap:nowrap}
       .brand{min-height:40px;display:flex;align-items:center;font-size:1.05rem}
-      .controls{order:2;width:100%;justify-content:space-between}
+      .controls{order:initial;width:auto;flex:1;justify-content:flex-end}
       .nav-links{display:none}
-      .persona-switch{flex:1}
-      .persona-btn{flex:1;padding:0 10px;min-height:44px;font-size:.72rem}
-      .theme-toggle{min-height:44px;width:48px}
-      .hire-btn{padding:0 14px;min-height:44px}
+      .persona-switch{flex:0 1 300px}
+      .persona-btn{flex:1;padding:0 9px;min-height:42px;font-size:.68rem}
+      .theme-toggle{min-height:42px;width:44px;flex:0 0 44px}
+      .hire-btn{display:none}
+      .topbar.scrolled .persona-switch{display:none}
+      .topbar.scrolled .hire-btn{display:inline-flex;min-height:42px;padding:0 14px;border-radius:999px;white-space:nowrap}
       .hero{padding:32px 0 50px;min-height:auto}
       .hero-grid{gap:24px}
       h1{font-size:clamp(3.25rem,16vw,5.65rem);line-height:.92;margin:18px 0 16px}
@@ -436,14 +449,14 @@
       .foot{flex-direction:column;text-align:center}
     }
     @media(max-width:520px){
-      .topbar{position:sticky}
-      .nav{padding:10px 0 12px}
-      .controls{gap:8px;display:grid;grid-template-columns:1fr auto;grid-template-areas:"persona theme" "hire hire"}
-      .persona-switch{grid-area:persona}
-      .theme-toggle{grid-area:theme}
-      .hire-btn{grid-area:hire;width:100%;border-radius:12px}
-      .persona-switch{border-radius:12px;padding:5px}
-      .persona-btn{font-size:.7rem;border-radius:9px}
+      .nav{min-height:58px;padding:8px 0}
+      .brand{font-size:1rem}
+      .controls{gap:7px;min-width:0}
+      .persona-switch{flex:0 0 102px;border-radius:12px;padding:4px}
+      .persona-btn{min-width:0;padding:0;font-size:0;border-radius:8px}
+      .persona-btn i{font-size:1.05rem;margin:0}
+      .theme-toggle{min-height:40px;width:40px;flex-basis:40px;border-radius:12px}
+      .topbar.scrolled .hire-btn{min-height:40px;padding:0 12px;border-radius:12px;font-size:.68rem}
       .eyebrow{font-size:.68rem;letter-spacing:.1em;gap:8px}
       h1{font-size:clamp(3.05rem,15.5vw,4.7rem)}
       .lead{max-width:34rem}
@@ -487,6 +500,7 @@
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <header class="topbar">
     <nav class="nav wrap" aria-label="Primary navigation">
       <a class="brand" href="#home" aria-label="Nadeem Muhammed M home">Nadeem<span>.</span></a>
@@ -522,13 +536,14 @@
           <p class="lead" id="hero-desc">Crafting responsive, high-performance web applications with modern technologies. Specializing in e-commerce, education platforms, and pixel-perfect digital experiences from Kerala, India.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects"><i class='bx bx-folder-open'></i><span id="btn-view">View My Work</span></a>
+            <a class="btn btn-secondary" href="https://interman-server.42web.io/uploads/NadeemCV.pdf" download="Nadeem-Muhammed-CV.pdf"><i class='bx bx-download'></i>Download CV</a>
             <a class="btn btn-secondary" href="#contact"><i class='bx bx-envelope'></i>Get In Touch</a>
           </div>
           <div class="socials" aria-label="Social links">
             <a href="https://linkedin.com/in/nadeem-melethil" target="_blank" rel="noopener" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
             <a href="mailto:nadeemmuhammed702@gmail.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
             <a href="tel:+917306062238" aria-label="Phone"><i class='bx bx-phone'></i></a>
-            <a href="#" aria-label="GitHub profile"><i class='bx bxl-github'></i></a>
+            <a href="https://github.com/nadeemmhdm" target="_blank" rel="noopener" aria-label="GitHub profile"><i class='bx bxl-github'></i></a>
           </div>
         </div>
 
@@ -653,7 +668,7 @@
             <div class="copy">Bachelor of Computer Applications - Kerala, India - May 2024 to Present</div>
           </article>
           <article class="card reveal">
-            <div class="card-title"><i class='bx bx-school'></i> Majlis HSS Vengade</div>
+            <div class="card-title"><i class='bx bxs-school'></i> Majlis HSS Vengade</div>
             <div class="copy">Higher Secondary - Kerala, India - April 2024 - Graduated with distinction</div>
           </article>
         </div>
@@ -692,18 +707,22 @@
           <div class="contact-list">
             <a href="mailto:nadeemmuhammed702@gmail.com"><i class='bx bx-envelope'></i> nadeemmuhammed702@gmail.com</a>
             <a href="tel:+917306062238"><i class='bx bx-phone'></i> +91 7306062238</a>
+            <a href="https://linkedin.com/in/nadeem-melethil" target="_blank" rel="noopener"><i class='bx bxl-linkedin'></i> linkedin.com/in/nadeem-melethil</a>
+            <a href="https://github.com/nadeemmhdm" target="_blank" rel="noopener"><i class='bx bxl-github'></i> github.com/nadeemmhdm</a>
             <div><i class='bx bx-map-pin'></i> Malappuram, Kerala, India</div>
           </div>
           <div class="socials">
             <a href="https://linkedin.com/in/nadeem-melethil" target="_blank" rel="noopener" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
             <a href="mailto:nadeemmuhammed702@gmail.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
-            <a href="#" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+            <a href="https://github.com/nadeemmhdm" target="_blank" rel="noopener" aria-label="GitHub"><i class='bx bxl-github'></i></a>
           </div>
         </div>
         <div class="contact-cards reveal">
           <a class="contact-card" href="mailto:nadeemmuhammed702@gmail.com"><i class='bx bx-envelope'></i><span><span class="label">Email</span><span class="value">nadeemmuhammed702@gmail.com</span></span></a>
           <a class="contact-card" href="tel:+917306062238"><i class='bx bx-phone'></i><span><span class="label">Phone</span><span class="value">+91 7306062238</span></span></a>
           <a class="contact-card" href="https://linkedin.com/in/nadeem-melethil" target="_blank" rel="noopener"><i class='bx bxl-linkedin'></i><span><span class="label">LinkedIn</span><span class="value">linkedin.com/in/nadeem-melethil</span></span></a>
+          <a class="contact-card" href="https://github.com/nadeemmhdm" target="_blank" rel="noopener"><i class='bx bxl-github'></i><span><span class="label">GitHub</span><span class="value">github.com/nadeemmhdm</span></span></a>
+          <a class="contact-card" href="https://interman-server.42web.io/uploads/NadeemCV.pdf" download="Nadeem-Muhammed-CV.pdf"><i class='bx bx-download'></i><span><span class="label">Curriculum Vitae</span><span class="value">Download my CV</span></span></a>
           <a class="contact-card" href="https://www.google.com/maps/search/?api=1&query=Malappuram%2C%20Kerala%2C%20India" target="_blank" rel="noopener"><i class='bx bx-map-pin'></i><span><span class="label">Location</span><span class="value">Malappuram, Kerala, India</span></span></a>
         </div>
       </div>
@@ -718,6 +737,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/nadeemmhdm" target="_blank" rel="noopener"><i class='bx bxl-github'></i> GitHub</a></li>
       </ul>
       <div>Built in Kerala, 2026</div>
     </div>
@@ -733,7 +753,7 @@
         desc:'Crafting responsive, high-performance web applications with modern technologies. Specializing in e-commerce, education platforms, and pixel-perfect digital experiences from Kerala, India.',
         pcRole:'Full Stack Developer',
         pcAvatar:'bx bx-user',
-        statN:'3+', statL:'Projects',
+        statN:'6+', statL:'Projects',
         btnView:'View My Work',
         projHeading:'Selected <em>Projects</em>',
         expHeading:'My <em>Experience</em>',
@@ -748,14 +768,19 @@
           ['bx bx-shield-alt-2','Security Knowledge',['Ethical Hacking','Network Security','Penetration Testing','Secure Coding']]
         ],
         projects:[
-          ['bx bx-book-open','2024 - 2025','Interman Study Abroad','Education Consultancy Platform','A modern consultancy platform with course listings, dynamic inquiry forms, SEO optimization, and full mobile responsiveness.','https://intermanstudyabroad.com','Stack: WordPress, Custom PHP, Elementor Pro, MySQL. SEO: schema markup, sitemap, mobile optimization, Core Web Vitals tuning.'],
-          ['bx bx-paint','2023 - 2024','Metamo Surface','Textured Paint Supplier','Premium product showcase for a textured paint brand with structured catalog, brand-aligned visuals, and responsive design.','https://metamosurface.com','Stack: WordPress, WooCommerce, Custom CSS, Contact Form 7. Built with product categories, quote flow, and mobile-first layouts.'],
-          ['bx bx-cart','2024','Freelance Builds','E-commerce and Service Sites','Multiple client websites across e-commerce and service domains, tuned for client goals, usability, and performance.','#','Tech: React, Next.js, Tailwind CSS, Shopify Liquid, PHP. Process: wireframe, approval, development, QA, deploy.']
+          ['bx bx-buildings','Current','Skyline Metal Smelting LLC','Company Website','Designing and developing the official business website with responsive layouts and performance-focused implementation.','https://skylinemetalgroup.com/','Current engagement: official business website design and development, responsive layout systems, and performance optimization.'],
+          ['bx bx-shield-quarter','Client Portal','Religare','Client Management Portal','Developed and optimized secure client portal interfaces, streamlining workflow automation and database queries.','https://religare.freedev.app/','Focus: secure portal interfaces, workflow automation, and database-query optimization.'],
+          ['bx bx-book-open','Education','Interman Study Abroad','Education Consultancy Website','Designed and developed a modern consultancy platform with inquiry forms and search-ranking optimization.','https://intermanstudyabroad.com','Focus: modern education consultancy design, responsive inquiry forms, and technical SEO improvements.'],
+          ['bx bx-paint','Supplier Website','Metamo Surface','Textured Paint Supplier Website','Created responsive product catalog and supplier pages while strengthening online branding and user-interface speed.','https://metamosurface.com','Focus: responsive product catalog, supplier pages, visual branding, and front-end performance.'],
+          ['bx bxs-graduation','Education Apps','1XEDU','Education Web Applications','Maintained portal interfaces for students and administrators, managing deployment workflows and post-launch support.','https://1xedu.in/','Focus: student and administrator portal interfaces, deployment workflows, and ongoing post-launch support.'],
+          ['bx bx-cart','E-commerce Platform','K-store','No-Code Store Builder','Built a secure no-code e-commerce platform that helps businesses launch professional online stores with flexible order and payment options.','https://kstore.42web.io/','Features: responsive store templates, product and stock management, WhatsApp orders, UPI QR payments, Razorpay, cash on delivery, store analytics, custom domains, staff roles, and protected checkout.']
         ],
         timeline:[
-          ['bx bx-code-alt','2024 - 2025','Full Stack Web Developer','Freelance - Remote, Kerala, India','Developed and launched client websites across e-commerce and education sectors, handling design, development, SEO, and deployment.'],
-          ['bx bx-paint-roll','Jun 2023 - May 2024','Web Developer','Metamo Textured Paint Supplier - Project-based','Designed and developed a product showcase website focused on brand identity, catalog structure, and responsive browsing.'],
-          ['bx bx-book','May 2022 - Aug 2022','Web Developer','Interman Study Abroad - Project-based','Built an education consultancy website with course listings, inquiry forms, SEO setup, and mobile optimization.']
+          ['bx bx-buildings','Current','Web Developer','Skyline Metal Smelting LLC','Designing and developing the official business website, creating responsive layouts, and optimizing performance.'],
+          ['bx bx-shield-quarter','Client Management Portal','Web Developer','Religare','Developed and optimized secure client portal interfaces, streamlining workflow automation and database queries.'],
+          ['bx bx-book-open','Education Consultancy Website','Web Developer','Interman Study Abroad','Designed and developed a modern consultancy platform, implemented inquiry forms, and optimized search rankings.'],
+          ['bx bx-paint','Textured Paint Supplier Website','Web Developer','Metamo Surface','Created responsive product catalog and supplier pages, strengthening online branding and user-interface speed.'],
+          ['bx bxs-graduation','Education Web Applications','Web Developer','1XEDU','Maintained portal interfaces for students and administrators while managing deployment workflows and post-launch support.']
         ]
       },
       pen: {
@@ -812,7 +837,7 @@
           <p>${p[4]}</p>
           <div class="project-actions">
             <a class="text-link" href="${p[5]}" ${p[5] !== '#' ? 'target="_blank" rel="noopener"' : ''}>${p[5] !== '#' ? 'Live Site' : 'Portfolio'} <i class='bx bx-right-arrow-alt'></i></a>
-            <button class="details-btn" type="button" onclick="toggleDetails(${index}, '${id}')">Details <i class='bx bx-chevron-down'></i></button>
+            <button class="details-btn" type="button" aria-expanded="false" onclick="toggleDetails(${index}, '${id}', this)">Details <i class='bx bx-chevron-down'></i></button>
           </div>
           <div class="details" id="${id}-details-${index}"><div class="details-inner"><div class="details-box">${p[6]}</div></div></div>
         </article>`).join('');
@@ -844,7 +869,7 @@
       document.getElementById('stat-proj-l').textContent = d.statL;
       document.getElementById('pc-tags').innerHTML = d.pcTags.map(t=>`<span class="tag">${t}</span>`).join('');
       document.getElementById('about-tags').innerHTML = d.tags.map(t=>`<span class="chip"><i class='bx bx-check'></i>${t}</span>`).join('');
-      document.getElementById('about-stat-n').textContent = p === 'dev' ? '3+' : '1+';
+      document.getElementById('about-stat-n').textContent = p === 'dev' ? '6+' : '1+';
       document.getElementById('about-stat-l').textContent = p === 'dev' ? 'Live projects delivered' : 'Year learning security';
       document.getElementById('proj-heading').innerHTML = d.projHeading;
       document.getElementById('exp-heading').innerHTML = d.expHeading;
@@ -862,8 +887,10 @@
       document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
       document.getElementById('theme-icon').className = isDark ? 'bx bx-moon' : 'bx bx-sun';
     }
-    function toggleDetails(index, id){
-      document.getElementById(`${id}-details-${index}`).classList.toggle('open');
+    function toggleDetails(index, id, button){
+      const details = document.getElementById(`${id}-details-${index}`);
+      const isOpen = details.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(isOpen));
     }
 
     const observer = new IntersectionObserver(entries=>{
@@ -889,7 +916,11 @@
 
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('main section[id]');
+    const topbar = document.querySelector('.topbar');
     window.addEventListener('scroll',()=>{
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      document.documentElement.style.setProperty('--scroll-progress', `${maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0}%`);
+      topbar.classList.toggle('scrolled', scrollY > 80);
       let current = '';
       sections.forEach(section=>{if(scrollY >= section.offsetTop - 120) current = section.id;});
       navLinks.forEach(link=>link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
